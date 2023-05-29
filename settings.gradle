@@ -1,0 +1,4 @@
+rootProject.name = 'auto-lotto'
+include 'common'
+include 'auto-lotto-aot'
+include 'auto-lotto-jit'
