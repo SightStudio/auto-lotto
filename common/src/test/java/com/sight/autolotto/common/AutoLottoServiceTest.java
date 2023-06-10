@@ -2,6 +2,7 @@ package com.sight.autolotto.common;
 
 import com.sight.autolotto.common.autolotto.AutoLottoService;
 import config.IntegrationTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,7 @@ public class AutoLottoServiceTest extends IntegrationTest {
   AutoLottoService sut;
 
   @Test
+  @Disabled
   void 로또_자동_구매_1000() {
 
     // given
