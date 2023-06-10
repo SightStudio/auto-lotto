@@ -8,10 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AutoLottoServiceTest extends IntegrationTest {
 
   @Autowired
-  AutoLottoService autoLottoService;
+  AutoLottoService sut;
 
   @Test
-  void test() {
-    autoLottoService.test3();
+  void 로또_자동_구매_1000() {
+
+    // given
+    int 자동_게임_구매_수 = 1;
+
+    // when
+    sut.purchaseLottoByAuto(자동_게임_구매_수);
   }
 }

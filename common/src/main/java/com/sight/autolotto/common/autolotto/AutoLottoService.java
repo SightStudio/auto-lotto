@@ -2,33 +2,16 @@ package com.sight.autolotto.common.autolotto;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import java.nio.file.Paths;
+import com.microsoft.playwright.options.AriaRole;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AutoLottoService {
 
-  public void test() {
-    try (Playwright playwright = Playwright.create()) {
-      Browser browser = playwright.chromium().launch();
-      Page page = browser.newPage();
-      page.navigate("http://playwright.dev");
-      System.out.println(page.title());
-    }
-  }
-
-  public void test2() {
-    try (Playwright playwright = Playwright.create()) {
-      Browser browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
-      Page page = browser.newPage();
-      page.navigate("http://whatsmyuseragent.org/");
-      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
-    }
-  }
-
-  public void test3() {
+  public void purchaseLottoByAuto(int ticketCount) {
     final String USER_ID = "";
     final String USER_PW = "";
 
@@ -47,7 +30,26 @@ public class AutoLottoService {
 
       page.press("form[name=\"jform\"] >> text=로그인", "Enter");
       Thread.sleep(5000);
-      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
+
+      page.navigate("https://ol.dhlottery.co.kr/olotto/game/game645.do");
+      page.locator("#popupLayerAlert").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("확인"));
+
+      page.click("text=자동번호발급");
+
+      Thread.sleep(3000);
+
+      page.selectOption("select", String.valueOf(ticketCount));
+
+      page.click("text=확인");
+
+      page.click("input:has-text(\"구매하기\")");
+
+      Thread.sleep(3000);
+
+      page.click("text=확인 취소 >> input[type=\"button\"]");
+//      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("example.png")));
+
+      page.click("input[name=\"closeLayer\"]");
 
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
